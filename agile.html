@@ -1,0 +1,208 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style>
+
+body {
+  font: 13px/1.3 'Lucida Grande', sans-serif;
+  color: #666;
+}
+.chart {
+  display: table;
+  table-layout: fixed;
+  width: 60%;
+  max-width: 700px;
+  height: 200px;
+  margin: 0 auto;
+  background-image: linear-gradient(bottom, rgba(0, 0, 0, 0.1) 2%, transparent 100%);
+  background-size: 100% 50px;
+  background-position: left top;
+}
+.chart li {
+  position: relative;
+  display: table-cell;
+  vertical-align: bottom;
+  height: 200px;
+}
+.chart span {
+  margin: 0 1em;
+  display: block;
+  background: red;
+  animation: draw 1s ease-in-out;
+}
+.chart span:before {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  padding: 5px 1em 0;
+  display: block;
+  text-align: center;
+  content: attr(title);
+  word-wrap: break-word;
+}
+.vericaltext {
+  width: 1px;
+  position: absolute;
+  word-wrap: break-word;
+  font-family: monospace;
+  /* this is just for good looks */
+}
+@keyframes draw {
+  0% {
+    height: 0;
+  }
+}
+.card{
+	border-radius: 50px;
+}
+</style>
+</head>
+<body style="padding-top:10%;background-color:black;">
+ <div class="row justify-content-center no-gutters mb-15 mb-lg-0 align-middle">
+                <div class="col-lg-16">
+                    <div class="bg-black text-center h-100">
+                        <div class="d-flex h-100">
+                            <div class=" w-100 my-auto text-center">
+							Category:<select id="op1" class="class1" style="color:black;">
+							<option>Food</option>
+							<option>Phone</option>
+							</select>
+							&nbsp;&nbsp;&nbsp;
+							Items:<select id="op2" class="class1" style="color:black;">
+							<option>Veg</option>
+                            <option>Non-veg</option>
+							</select>
+							&nbsp;&nbsp;&nbsp;
+							Brand:<select id="op3" style="color:black;">
+							<option>Kwality Wall's</option>
+                            <option>Dunkin' Donuts</option>
+							</select>
+							</br></br></br>
+                                <h4 class="text-white" id="title"></h4>
+                                <p class="mb-0">
+								 <div class="card text-center text-white bg-dark">
+								<div class="card-body">
+								</br>
+								<ul class="chart" id="graph">
+								<li>
+                                <span style='height:85%' title='moango'></span>
+                                </li>
+                                <li>
+                                <span style='height:75%' title='chocolate'></span>
+                                </li>
+                                <li>
+                                <span style='height:95%' title='vanilla'></span>
+                                </li>
+                                <li>
+                                <span style='height:55%' title='caramel'></span>
+                                </li>
+                                <li>
+                                <span style='height:65%' title='strawberry'></span>
+                                </li>
+								</ul>    
+								</div>
+								</div>
+								</p>
+                                <br/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<script>
+jQuery(function($){
+	$("#op1").change(function(){
+		if($(this).val()=="Food"){
+		var s = "<option>Veg</option>\n<option>Non-veg</option>\n";
+		$("#op2").html(s);
+		var s1 = "<option>Kwality Wall's</option>\n<option>Dunkin' Donuts</option>\n";
+			$("#op3").html(s1);
+		}
+		else if($(this).val()=="Phone"){
+		var s = "<option>Touch</option>\n<option>Normal</option>\n";
+		$("#op2").html(s);
+		var s1 = "<option>Apple</option>\n<option>samsung</option>\n";
+			$("#op3").html(s1);
+		}
+		else{
+			var s = "<option>Veg</option>\n<option>Non-veg</option>\n";
+			$("#op2").html(s);
+			var s1 = "<option>Kwality Wall's</option>\n<option>Dunkin' Donuts</option>\n";
+			$("#op3").html(s1);
+			$("#title").html("");
+		}
+	});
+	$("#op2").change(function(){
+		if($(this).val()=="Veg"){
+		var s = "<option>Kwality Wall's</option>\n<option>Dunkin' Donuts</option>\n";
+		$("#op3").html(s);
+		}
+        else if($(this).val()=="Non-veg"){
+		var s = "<option>KFC</option>\n<option>Dominos</option>\n";
+		$("#op3").html(s);
+		}
+		else if($(this).val()=="Touch"){
+		var s = "<option>Apple</option>\n<option>samsung</option>\n";
+		$("#op3").html(s);
+		}
+		else if($(this).val()=="Normal"){
+		var s = "<option>Nokia</option>\n<option>samsung</option>\n";
+		$("#op3").html(s);
+		}
+		else{
+			var s = "<option>Kwality Wall's</option>\n";
+			$("#title").html("");
+			$("#op3").html(s);
+		}		
+	});
+	$("select").change(function(){
+         if($("#op3").val()=="Kwality Wall's"){
+			$("#title").html("Popularity");
+			var s="<li>\n<span style='height:85%' title='moango'></span>\n</li>\n<li>\n<span style='height:75%' title='chocolate'></span>\n</li>\n<li>\n<span style='height:95%' title='vanilla'></span>\n</li>\n<li>\n<span style='height:55%' title='caramel'></span>\n</li>\n<li>\n<span style='height:65%' title='strawberry'></span>\n</li>";
+			$("#graph").html(s);
+		}
+		else if($("#op3").val()=="Dunkin' Donuts"){
+			$("#title").html("Popularity");
+			var s="<li>\n<span style='height:15%' title='chocolate coconut'></span>\n</li>\n<li>\n<span style='height:85%' title='double chocolate'></span>\n</li>\n<li>\n<span style='height:55%' title='jelly'></span>\n</li>\n<li>\n<span style='height:75%' title='butter nut'></span>\n</li>\n<li>\n<span style='height:95%' title='caramel'></span>\n</li>";
+			$("#graph").html(s);
+		}
+		else if($("#op3").val()=="KFC"){
+			$("#title").html("Prices");
+			var s="<li>\n<span style='height:20%' title='Mingls Bucket'></span>\n</li>\n<li>\n<span style='height:30%' title='Big 8'></span>\n</li>\n<li>\n<span style='height:45%' title='Duo Bucket'></span>\n</li>\n<li>\n<span style='height:60%' title='Meal'></span>\n</li>\n<li>\n<span style='height:95%' title='Triple Treat'></span>\n</li>";
+			$("#graph").html(s);
+		}
+		else if($("#op3").val()=="Dominos"){
+			$("#title").html("Prices");
+			var s="<li>\n<span style='height:20%' title='Breads'></span>\n</li>\n<li>\n<span style='height:90%' title='Ultimate pizza'></span>\n</li>\n<li>\n<span style='height:45%' title='Specialty pizza'></span>\n</li>\n<li>\n<span style='height:75%' title='Favourite pizza'></span>\n</li>\n<li>\n<span style='height:35%' title='Classic pizza'></span>\n</li>";
+			$("#graph").html(s);
+		}
+		else if($("#op3").val()=="Apple"){
+			$("#title").html("Usage");
+			var s="<li>\n<span style='height:95%' title='Iphone 4s'></span>\n</li>\n<li>\n<span style='height:60%' title='Iphone 4'></span>\n</li>\n<li>\n<span style='height:50%' title='Iphone 5s'></span>\n</li>\n<li>\n<span style='height:65%' title='Iphone 7 plus'></span>\n</li>\n<li>\n<span style='height:80%' title='Iphone X'></span>\n</li>";
+			$("#graph").html(s);
+		}
+		else if($("#op3").val()=="samsung" && $("#op2").val()=="Touch"){
+			$("#title").html("Prices");
+			var s="<li>\n<span style='height:20%' title='J2'></span>\n</li>\n<li>\n<span style='height:80%' title='A21s'></span>\n</li>\n<li>\n<span style='height:60%' title='MO1'></span>\n</li>\n<li>\n<span style='height:85%' title='M31s'></span>\n</li>\n<li>\n<span style='height:95%' title='S10'></span>\n</li>";
+			$("#graph").html(s);
+		}
+		else if($("#op3").val()=="Nokia"){
+			$("#title").html("Production");
+			var s="<li>\n<span style='height:90%' title='Black'></span>\n</li>\n<li>\n<span style='height:60%' title='White'></span>\n</li>";
+			$("#graph").html(s);
+		}
+		else if($("#op3").val()=="samsung"){
+			$("#title").html("Production");
+			var s="<li>\n<span style='height:80%' title='Black'></span>\n</li>\n<li>\n<span style='height:90%' title='White'></span>\n</li>\n<li>\n<span style='height:90%' title='Grey'></span>\n</li>\n<li>\n<span style='height:30%' title='Blue'></span>\n</li>";
+			$("#graph").html(s);
+		}
+	});
+});
+</script>
+</body>
+</html>
